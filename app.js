@@ -45,116 +45,113 @@ let databaseFunction = '';
 
 const runFunction = function (event) {
     event.preventDefault();
-    console.log('inside', databaseFunction)
-    if (databaseFunction === 'print') {
-        let htmlStr = '';
-        for (let i = 0; i < employeeList.length; i++) {
-            htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-            htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-            htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
-            htmlStr += `<p> ----- </p></div>`;
-        }
-        render(htmlStr);
-    } else if (databaseFunction === 'verify') {
-        let htmlStr = '<div class="print"><p> Employee Not Found </p></div>';
-        for (let i = 0; i < employeeList.length; i++) {
-            if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                htmlStr = '<div class="print"><p> Employee Found </p></div>';
+    switch (databaseFunction) {
+        case 'print':
+            let htmlStr = '';
+            employeeList.forEach(e => render(e));
+            break;
+        case 'verify':
+            let htmlStr = '';
+            employeeList.some(e => e.name.toLowerCase() === $('#input').val().toLowerCase() ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr = '<div class="print"><p>Employee Not Found</p></div>');
+            render(htmlStr);
+            break;
+        case 'lookup':
+            let htmlStr = '';
+            let lookup = false;
+            for (let i = 0; i < employeeList.length; i++) {
+                if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
+                    htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
+                    htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
+                    htmlStr += `<p> ${employeeList[i].phoneNum} </p></div>`;
+                    lookup = true;
+                }
             }
-        }
-        render(htmlStr);
-    }
-    else if (databaseFunction === 'lookup') {
-        let htmlStr = '';
-        let lookup = false;
-        for (let i = 0; i < employeeList.length; i++) {
-            if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                htmlStr += `<p> ${employeeList[i].phoneNum} </p></div>`;
-                lookup = true;
+            if (lookup === false) {
+                htmlStr += `<p>Employee Not Found</p>`;
             }
-        }
-        if (lookup === false) {
-            htmlStr += `<p>Employee Not Found</p>`;
-        }
-        render(htmlStr);
-    } else if (databaseFunction === 'contains') {
-        let htmlStr = '';
-        let containsEmployee = false
-        for (let i = 0; i < employeeList.length; i++) {
-            if (employeeList[i].name.toLowerCase().includes($('#input').val().toLowerCase())) {
+            render(htmlStr);
+            break;
+        case 'contains':
+            let htmlStr = '';
+            let containsEmployee = false
+            for (let i = 0; i < employeeList.length; i++) {
+                if (employeeList[i].name.toLowerCase().includes($('#input').val().toLowerCase())) {
+                    htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
+                    htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
+                    htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
+                    htmlStr += `<p> ----- </p></div>`;
+                    containsEmployee = true
+                }
+            }
+            if (containsEmployee === false) {
+                htmlStr += `<p>No Employee Match</p>`;
+            }
+            render(htmlStr);
+            break;
+        case 'update':
+            let htmlStr = '';
+            for (let i = 0; i < employeeList.length; i++) {
+                if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
+                    employeeList[i].officeNum = $('#office').val();
+                    employeeList[i].phoneNum = $('#phone').val();
+                    htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
+                    htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
+                    htmlStr += `<p> ${employeeList[i].phoneNum} </p></div>`;
+                }
+            }
+            render(htmlStr);
+            break;
+        case 'add':
+            let htmlStr = '';
+            const newEmployee = {
+                name: $('#input').val(),
+                officeNum: $('#office').val(),
+                phoneNum: $('#phone').val()
+            }
+
+            employeeList.push(newEmployee);
+
+            for (let i = 0; i < employeeList.length; i++) {
                 htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
                 htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
                 htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
                 htmlStr += `<p> ----- </p></div>`;
-                containsEmployee = true
             }
-        }
-        if (containsEmployee === false) {
-            htmlStr += `<p>No Employee Match</p>`;
-        }
-        render(htmlStr);
-    } else if (databaseFunction === 'update') {
-        let htmlStr = '';
-        for (let i = 0; i < employeeList.length; i++) {
-            if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                employeeList[i].officeNum = $('#office').val();
-                employeeList[i].phoneNum = $('#phone').val();
+            render(htmlStr);
+            break;
+        case 'delete':
+            let htmlStr = '';
+            for (let i = 0; i < employeeList.length; i++) {
+                if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
+                    employeeList.splice(i, 1);
+                }
+            }
+            for (let i = 0; i < employeeList.length; i++) {
                 htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
                 htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                htmlStr += `<p> ${employeeList[i].phoneNum} </p></div>`;
+                htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
+                htmlStr += `<p> ----- </p></div>`;
             }
-        }
-        render(htmlStr);
-    } else if (databaseFunction === 'add') {
-        let htmlStr = '';
-        const newEmployee = {
-            name: $('#input').val(),
-            officeNum: $('#office').val(),
-            phoneNum: $('#phone').val()
-        }
-
-        employeeList.push(newEmployee);
-
-        for (let i = 0; i < employeeList.length; i++) {
-            htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-            htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-            htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
-            htmlStr += `<p> ----- </p></div>`;
-        }
-        render(htmlStr);
-    } else if (databaseFunction === 'delete') {
-        let htmlStr = '';
-        for (let i = 0; i < employeeList.length; i++) {
-            if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                employeeList.splice(i, 1);
+            render(htmlStr);
+            break;
+        case 'alphabetize':
+            let htmlStr = '';
+            employeeList.sort(function (a, b) {
+                var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
+                if (nameA < nameB)
+                    return -1
+                if (nameA > nameB)
+                    return 1
+                return 0
+            })
+            for (let i = 0; i < employeeList.length; i++) {
+                htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
+                htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
+                htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
+                htmlStr += `<p> ----- </p></div>`;
             }
-        }
-        for (let i = 0; i < employeeList.length; i++) {
-            htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-            htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-            htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
-            htmlStr += `<p> ----- </p></div>`;
-        }
-        render(htmlStr);
-    } else if (databaseFunction === 'alphabetize') {
-        let htmlStr = '';
-        employeeList.sort(function (a, b) {
-            var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
-            if (nameA < nameB)
-                return -1
-            if (nameA > nameB)
-                return 1
-            return 0
-        })
-        for (let i = 0; i < employeeList.length; i++) {
-            htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-            htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-            htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
-            htmlStr += `<p> ----- </p></div>`;
-        }
-        render(htmlStr);
+            render(htmlStr);
+            break;
     }
 }
 
