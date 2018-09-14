@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Employee Manager</title>
+</head>
+
+<body>
+    <header>
+        <h1>Employee Manager</h1>
+    </header>
+    <aside>
+        <ul class="commands">
+            <li>
+                <h6 id="print">Print</h6>
+            </li>
+            <li>
+                <h6 id="verify">Verify</h6>
+            </li>
+            <li>
+                <h6 id="lookup">Lookup</h6>
+            </li>
+            <li>
+                <h6 id="contains">Contains</h6>
+            </li>
+            <li>
+                <h6 id="update">Update</h6>
+            </li>
+            <li>
+                <h6 id="add">Add</h6>
+            </li>
+            <li>
+                <h6 id="delete">Delete</h6>
+            </li>
+            <li>
+                <h6 id="alphabetize">Alphabetize</h6>
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <form>
+            <input type="text" id="input" placeholder="Name">
+            <input type="text" id="office" placeholder="Office Number">
+            <input type="text" id="phone" placeholder="Phone Number">
+            <button type="submit" id="submit">Submit</button>
+        </form>
+        <section id="render">
+        </section>
+    </main>
+    <script src="dom.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
