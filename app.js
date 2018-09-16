@@ -1,4 +1,4 @@
-let employeeList = [
+    employeeList = [
     {
         name: 'Jan',
         officeNum: 1,
@@ -44,35 +44,35 @@ let employeeList = [
 let databaseFunction = '';
 
 const runFunction = function (event) {
+    // const employeeList = state.employeeList;
     event.preventDefault();
+    let htmlStr = '';
     switch (databaseFunction) {
         case 'print':
-            let htmlStr = '';
-            employeeList.forEach(e => render(e));
+            employeeList.forEach(employee => {
+                htmlStr += `<div class="print"><p> ${employee.name} </p>`;
+                htmlStr += `<p> ${employee.officeNum} </p>`;
+                htmlStr += `<p> ${employee.phoneNum} </p>`;
+                htmlStr += `<p>-----</p></div>`;
+            });
+            render(htmlStr);
             break;
         case 'verify':
-            let htmlStr = '';
-            employeeList.some(e => e.name.toLowerCase() === $('#input').val().toLowerCase() ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr = '<div class="print"><p>Employee Not Found</p></div>');
+            employeeList.some(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr = '<div class="print"><p>Employee Not Found</p></div>');
             render(htmlStr);
             break;
         case 'lookup':
-            let htmlStr = '';
-            let lookup = false;
-            for (let i = 0; i < employeeList.length; i++) {
-                if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                    htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                    htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                    htmlStr += `<p> ${employeeList[i].phoneNum} </p></div>`;
-                    lookup = true;
-                }
-            }
-            if (lookup === false) {
-                htmlStr += `<p>Employee Not Found</p>`;
+            let match = false;
+            employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? match = employee : htmlStr = `<p>No Employee Match</p>`)
+            console.log(match);
+            if (match !== false) {
+            htmlStr += `<div class="print"><p> ${match.name} </p>`;
+            htmlStr += `<p> ${match.officeNum} </p>`;
+            htmlStr += `<p> ${match.phoneNum} </p>`;
             }
             render(htmlStr);
             break;
         case 'contains':
-            let htmlStr = '';
             let containsEmployee = false
             for (let i = 0; i < employeeList.length; i++) {
                 if (employeeList[i].name.toLowerCase().includes($('#input').val().toLowerCase())) {
@@ -89,7 +89,6 @@ const runFunction = function (event) {
             render(htmlStr);
             break;
         case 'update':
-            let htmlStr = '';
             for (let i = 0; i < employeeList.length; i++) {
                 if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
                     employeeList[i].officeNum = $('#office').val();
@@ -102,7 +101,6 @@ const runFunction = function (event) {
             render(htmlStr);
             break;
         case 'add':
-            let htmlStr = '';
             const newEmployee = {
                 name: $('#input').val(),
                 officeNum: $('#office').val(),
@@ -120,7 +118,6 @@ const runFunction = function (event) {
             render(htmlStr);
             break;
         case 'delete':
-            let htmlStr = '';
             for (let i = 0; i < employeeList.length; i++) {
                 if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
                     employeeList.splice(i, 1);
@@ -135,7 +132,6 @@ const runFunction = function (event) {
             render(htmlStr);
             break;
         case 'alphabetize':
-            let htmlStr = '';
             employeeList.sort(function (a, b) {
                 var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
                 if (nameA < nameB)
@@ -150,13 +146,17 @@ const runFunction = function (event) {
                 htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
                 htmlStr += `<p> ----- </p></div>`;
             }
-            render(htmlStr);
+            render2(htmlStr2);
             break;
     }
 }
 
 const render = function (htmlStr) {
     $('#render').html(htmlStr);
+}
+
+const render2 = function (htmlStr2) {
+    $('#render').html(htmlStr2);
 }
 
 const hideForm = function () {
