@@ -1,50 +1,52 @@
-    employeeList = [
-    {
-        name: 'Jan',
-        officeNum: 1,
-        phoneNum: '222-222-2222'
-    },
-    {
-        name: 'Juan',
-        officeNum: 304,
-        phoneNum: '489-789-8789'
-    },
-    {
-        name: 'Margie',
-        officeNum: 789,
-        phoneNum: '789-789-7897'
-    },
-    {
-        name: 'Sara',
-        officeNum: 32,
-        phoneNum: '222-789-4654'
-    },
-    {
-        name: 'Tyrell',
-        officeNum: 3,
-        phoneNum: '566-621-0452'
-    },
-    {
-        name: 'Tasha',
-        officeNum: 213,
-        phoneNum: '789-766-5675'
-    },
-    {
-        name: 'Ty',
-        officeNum: 211,
-        phoneNum: '789-766-7865'
-    },
-    {
-        name: 'Sarah',
-        officeNum: 345,
-        phoneNum: '222-789-5231'
-    }
-];
+const state = {
+    employeeList: [
+        {
+            name: 'Jan',
+            officeNum: 1,
+            phoneNum: '222-222-2222'
+        },
+        {
+            name: 'Juan',
+            officeNum: 304,
+            phoneNum: '489-789-8789'
+        },
+        {
+            name: 'Margie',
+            officeNum: 789,
+            phoneNum: '789-789-7897'
+        },
+        {
+            name: 'Sara',
+            officeNum: 32,
+            phoneNum: '222-789-4654'
+        },
+        {
+            name: 'Tyrell',
+            officeNum: 3,
+            phoneNum: '566-621-0452'
+        },
+        {
+            name: 'Tasha',
+            officeNum: 213,
+            phoneNum: '789-766-5675'
+        },
+        {
+            name: 'Ty',
+            officeNum: 211,
+            phoneNum: '789-766-7865'
+        },
+        {
+            name: 'Sarah',
+            officeNum: 345,
+            phoneNum: '222-789-5231'
+        }
+    ]
+};
 
 let databaseFunction = '';
 
 const runFunction = function (event) {
-    // const employeeList = state.employeeList;
+    let employeeList = state.employeeList;
     event.preventDefault();
     let htmlStr = '';
     switch (databaseFunction) {
@@ -64,39 +66,38 @@ const runFunction = function (event) {
         case 'lookup':
             let match = false;
             employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? match = employee : htmlStr = `<p>No Employee Match</p>`)
-            console.log(match);
             if (match !== false) {
-            htmlStr += `<div class="print"><p> ${match.name} </p>`;
-            htmlStr += `<p> ${match.officeNum} </p>`;
-            htmlStr += `<p> ${match.phoneNum} </p>`;
+                htmlStr += `<div class="print"><p> ${match.name} </p>`;
+                htmlStr += `<p> ${match.officeNum} </p>`;
+                htmlStr += `<p> ${match.phoneNum} </p>`;
             }
             render(htmlStr);
             break;
         case 'contains':
             let containsEmployee = false
-            for (let i = 0; i < employeeList.length; i++) {
-                if (employeeList[i].name.toLowerCase().includes($('#input').val().toLowerCase())) {
-                    htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                    htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                    htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
-                    htmlStr += `<p> ----- </p></div>`;
-                    containsEmployee = true
-                }
-            }
+            userInput = $('#input').val().toLowerCase();
+            let foundEmployee = employeeList.filter(e => e.name.toLowerCase().includes(userInput));
+            foundEmployee.forEach(employee => {
+                htmlStr += `<div class="print"><p> ${employee.name} </p>`;
+                htmlStr += `<p> ${employee.officeNum} </p>`;
+                htmlStr += `<p> ${employee.phoneNum} </p>`;
+                htmlStr += `<p> ----- </p></div>`;
+                containsEmployee = true;
+            });
             if (containsEmployee === false) {
                 htmlStr += `<p>No Employee Match</p>`;
             }
             render(htmlStr);
             break;
         case 'update':
-            for (let i = 0; i < employeeList.length; i++) {
-                if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                    employeeList[i].officeNum = $('#office').val();
-                    employeeList[i].phoneNum = $('#phone').val();
-                    htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                    htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                    htmlStr += `<p> ${employeeList[i].phoneNum} </p></div>`;
-                }
+            let update = '';
+            employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? update = employee : htmlStr = `<p>No Employee Match</p>`);
+            update.officeNum = $('#office').val();
+            update.phoneNum = $('#phone').val();
+            if (update !== false) {
+                htmlStr += `<div class="print"><p> ${update.name} </p>`;
+                htmlStr += `<p> ${update.officeNum} </p>`;
+                htmlStr += `<p> ${update.phoneNum} </p></div>`;
             }
             render(htmlStr);
             break;
@@ -109,12 +110,12 @@ const runFunction = function (event) {
 
             employeeList.push(newEmployee);
 
-            for (let i = 0; i < employeeList.length; i++) {
-                htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
+            employeeList.forEach(employee => {
+                htmlStr += `<div class="print"><p> ${employee.name} </p>`;
+                htmlStr += `<p> ${employee.officeNum} </p>`;
+                htmlStr += `<p> ${employee.phoneNum} </p>`;
                 htmlStr += `<p> ----- </p></div>`;
-            }
+            })
             render(htmlStr);
             break;
         case 'delete':
@@ -146,17 +147,13 @@ const runFunction = function (event) {
                 htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
                 htmlStr += `<p> ----- </p></div>`;
             }
-            render2(htmlStr2);
+            render(htmlStr);
             break;
     }
 }
 
 const render = function (htmlStr) {
     $('#render').html(htmlStr);
-}
-
-const render2 = function (htmlStr2) {
-    $('#render').html(htmlStr2);
 }
 
 const hideForm = function () {
