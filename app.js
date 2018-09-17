@@ -40,12 +40,11 @@ const state = {
             officeNum: 345,
             phoneNum: '222-789-5231'
         }
-    ]
-};
+    ];
 
-let databaseFunction = '';
+    databaseFunction = '';
 
-const runFunction = function (event) {
+    runFunction = function (event) {
     let employeeList = state.employeeList;
     event.preventDefault();
     let htmlStr = '';
@@ -76,7 +75,7 @@ const runFunction = function (event) {
         case 'contains':
             let containsEmployee = false
             userInput = $('#input').val().toLowerCase();
-            let foundEmployee = employeeList.filter(e => e.name.toLowerCase().includes(userInput));
+            let foundEmployee = employeeList.filter(employee => employee.name.toLowerCase().includes(userInput));
             foundEmployee.forEach(employee => {
                 htmlStr += `<div class="print"><p> ${employee.name} </p>`;
                 htmlStr += `<p> ${employee.officeNum} </p>`;
@@ -119,17 +118,13 @@ const runFunction = function (event) {
             render(htmlStr);
             break;
         case 'delete':
-            for (let i = 0; i < employeeList.length; i++) {
-                if (employeeList[i].name.toLowerCase() === $('#input').val().toLowerCase()) {
-                    employeeList.splice(i, 1);
-                }
-            }
-            for (let i = 0; i < employeeList.length; i++) {
-                htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
+            employeeList.splice(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase(), 1)
+            employeeList.forEach(employee => {
+                htmlStr += `<div class="print"><p> ${employee.name} </p>`;
+                htmlStr += `<p> ${employee.officeNum} </p>`;
+                htmlStr += `<p> ${employee.phoneNum} </p>`;
                 htmlStr += `<p> ----- </p></div>`;
-            }
+            })
             render(htmlStr);
             break;
         case 'alphabetize':
@@ -141,16 +136,17 @@ const runFunction = function (event) {
                     return 1
                 return 0
             })
-            for (let i = 0; i < employeeList.length; i++) {
-                htmlStr += `<div class="print"><p> ${employeeList[i].name} </p>`;
-                htmlStr += `<p> ${employeeList[i].officeNum} </p>`;
-                htmlStr += `<p> ${employeeList[i].phoneNum} </p>`;
+            employeeList.forEach(employee => {
+                htmlStr += `<div class="print"><p> ${employee.name} </p>`;
+                htmlStr += `<p> ${employee.officeNum} </p>`;
+                htmlStr += `<p> ${employee.phoneNum} </p>`;
                 htmlStr += `<p> ----- </p></div>`;
-            }
+            })
             render(htmlStr);
             break;
     }
 }
+};
 
 const render = function (htmlStr) {
     $('#render').html(htmlStr);
@@ -185,7 +181,7 @@ const hidePrint = function () {
 }
 
 const print = function (event) {
-    databaseFunction = 'print';
+    state.databaseFunction = 'print';
     runFunction(event);
     removeFields();
     hideInput();
@@ -193,7 +189,7 @@ const print = function (event) {
 }
 
 const verify = function (event) {
-    databaseFunction = 'verify';
+    state.databaseFunction = 'verify';
     hidePrint();
     addInput();
     removeFields();
@@ -201,7 +197,7 @@ const verify = function (event) {
 }
 
 const lookup = function (event) {
-    databaseFunction = 'lookup';
+    state.databaseFunction = 'lookup';
     hidePrint();
     addInput();
     removeFields();
@@ -209,7 +205,7 @@ const lookup = function (event) {
 }
 
 const contains = function () {
-    databaseFunction = 'contains';
+    state.databaseFunction = 'contains';
     hidePrint();
     addInput();
     removeFields();
@@ -217,7 +213,7 @@ const contains = function () {
 }
 
 const update = function () {
-    databaseFunction = 'update';
+    state.databaseFunction = 'update';
     hidePrint();
     addInput();
     addFields();
@@ -225,7 +221,7 @@ const update = function () {
 }
 
 const add = function () {
-    databaseFunction = 'add';
+    state.databaseFunction = 'add';
     hidePrint();
     addInput();
     addFields();
@@ -233,7 +229,7 @@ const add = function () {
 }
 
 const remove = function () {
-    databaseFunction = 'delete';
+    state.databaseFunction = 'delete';
     hidePrint();
     addInput();
     removeFields();
@@ -241,7 +237,7 @@ const remove = function () {
 }
 
 const alphabetize = function (event) {
-    databaseFunction = 'alphabetize';
+    state.databaseFunction = 'alphabetize';
     runFunction(event);
     removeFields();
     hideInput();
