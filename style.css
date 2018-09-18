@@ -2,7 +2,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 130px 1fr;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -26,6 +26,11 @@ h6 {
     color: white;
     font-size: 14px;
     font-weight: bold;
+}
+
+h6:hover {
+    color: yellow;
+    font-size: 16px;
 }
 
 .two {
