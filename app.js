@@ -59,17 +59,17 @@ const state = {
                 render(htmlStr);
                 break;
             case 'verify':
-                employeeList.some(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr = '<div class="print"><p>Employee Not Found</p></div>');
+                employeeList.some(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase()) ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr ='<div class="print"><p>Employee Not Found</p></div>';
                 render(htmlStr);
                 break;
             case 'lookup':
                 let match = false;
-                employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? match = employee : htmlStr = `<p>No Employee Match</p>`)
-                if (match !== false) {
-                    htmlStr += `<div class="print"><p> ${match.name} </p>`;
-                    htmlStr += `<p> ${match.officeNum} </p>`;
-                    htmlStr += `<p> ${match.phoneNum} </p>`;
-                }
+                htmlStr += employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase());
+                // if (match !== false) {
+                //     htmlStr += `<div class="print"><p> ${match.name} </p>`;
+                //     htmlStr += `<p> ${match.officeNum} </p>`;
+                //     htmlStr += `<p> ${match.phoneNum} </p>`;
+                // }
                 render(htmlStr);
                 break;
             case 'contains':
@@ -152,6 +152,14 @@ const render = function (htmlStr) {
     $('#render').html(htmlStr);
 }
 
+const hideTitle = function () {
+    $('.title').addClass('hide');
+}
+
+const showRender = function () {
+    $('#render').addClass('show');
+}
+
 const hideForm = function () {
     $('form').removeClass('show')
 }
@@ -186,6 +194,7 @@ const print = function (event) {
     removeFields();
     hideInput();
     hideForm();
+    hideTitle();
 }
 
 const verify = function (event) {
@@ -194,6 +203,7 @@ const verify = function (event) {
     addInput();
     removeFields();
     showForm();
+    hideTitle();
 }
 
 const lookup = function (event) {
@@ -202,6 +212,7 @@ const lookup = function (event) {
     addInput();
     removeFields();
     showForm();
+    hideTitle();
 }
 
 const contains = function () {
@@ -210,6 +221,7 @@ const contains = function () {
     addInput();
     removeFields();
     showForm();
+    hideTitle();
 }
 
 const update = function () {
@@ -218,6 +230,7 @@ const update = function () {
     addInput();
     addFields();
     showForm();
+    hideTitle();
 }
 
 const add = function () {
@@ -226,6 +239,7 @@ const add = function () {
     addInput();
     addFields();
     showForm();
+    hideTitle();
 }
 
 const remove = function () {
@@ -234,6 +248,7 @@ const remove = function () {
     addInput();
     removeFields();
     showForm();
+    hideTitle();
 }
 
 const alphabetize = function (event) {
@@ -242,6 +257,7 @@ const alphabetize = function (event) {
     removeFields();
     hideInput();
     hideForm();
+    hideTitle();
 }
 
 $('#print').on('click', print);

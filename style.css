@@ -1,38 +1,25 @@
 body {
     height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 110px 1fr;
+    font-family: 'Montserrat', sans-serif;
 }
 
-header {
-    background: blue;
-    height: 100px;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-h1 {
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    padding: 30px 20px 10px 0px;
-    text-align: right;
+.grid {
+    display: grid;
+    grid-column: span 1;
 }
 
 aside {
-    background: gray;
+    background: rgb(51, 51, 51);
     line-height: 2;
-    width: 100px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
 }
 
-.commands {
-    margin-top: 300px;
-    margin-left: 15px;
+.one {
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 h6 {
@@ -41,10 +28,43 @@ h6 {
     font-weight: bold;
 }
 
+.two {
+    background: url(bckg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 10px solid white;
+}
+
+h1 {
+    font-size: 52px;
+    font-weight: bold;
+    color: white;
+    padding: 75px;
+    text-align: center;
+    position: relative;
+    top: 125px;
+}
+
+.yellow {
+    color: yellow;
+}
+
+h5 {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 120px;
+    font-weight: bold;
+}
+
+p {
+    color: white;
+}
+
 form {
     display: none;
-    margin-left: 200px;
-    margin-top: 200px;
 }
 
 input {
@@ -76,12 +96,6 @@ button {
     display: none;
 }
 
-/* .button {
-    border: none;
-    background-color: white;
-    z-index: 2;
-} */
-
 #render {
-    margin: 150px;
+    margin: 20px;
 }
