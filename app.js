@@ -63,13 +63,15 @@ const state = {
                 render(htmlStr);
                 break;
             case 'lookup':
-                let match = false;
-                htmlStr += employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase());
-                // if (match !== false) {
-                //     htmlStr += `<div class="print"><p> ${match.name} </p>`;
-                //     htmlStr += `<p> ${match.officeNum} </p>`;
-                //     htmlStr += `<p> ${match.phoneNum} </p>`;
-                // }
+                let lookupEmployee = employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase())
+                console.log(lookupEmployee);
+                if (lookupEmployee !== undefined) {
+                    htmlStr += `<div class="print"><p> ${lookupEmployee.name} </p>`;
+                    htmlStr += `<p> ${lookupEmployee.officeNum} </p>`;
+                    htmlStr += `<p> ${lookupEmployee.phoneNum} </p>`;
+                } else {
+                    htmlStr += '<div class="print"><p>Employee Not Found</p></div>'
+                };
                 render(htmlStr);
                 break;
             case 'contains':
@@ -89,12 +91,11 @@ const state = {
                 render(htmlStr);
                 break;
             case 'update':
-                let update = '';
-                employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase() ? update = employee : htmlStr = `<p>No Employee Match</p>`);
+                let updateEmployee = employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase())
                 update.officeNum = $('#office').val();
                 update.phoneNum = $('#phone').val();
-                if (update !== false) {
-                    htmlStr += `<div class="print"><p> ${update.name} </p>`;
+                if (updateEmployee !== undefined) {
+                    htmlStr += `<div class="print"><p> ${updateEmployee.name} </p>`;
                     htmlStr += `<p> ${update.officeNum} </p>`;
                     htmlStr += `<p> ${update.phoneNum} </p></div>`;
                 }
