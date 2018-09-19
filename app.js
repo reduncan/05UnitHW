@@ -13,7 +13,7 @@ const state = {
         {
             name: 'Margie',
             officeNum: 789,
-            phoneNum: '789-789-7897'    
+            phoneNum: '789-789-7897'
         },
         {
             name: 'Sara',
@@ -59,12 +59,11 @@ const state = {
                 render(htmlStr);
                 break;
             case 'verify':
-                employeeList.some(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase()) ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr ='<div class="print"><p>Employee Not Found</p></div>';
+                employeeList.some(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase()) ? htmlStr = '<div class="print"><p>Employee Found</p></div>' : htmlStr = '<div class="print"><p>Employee Not Found</p></div>';
                 render(htmlStr);
                 break;
             case 'lookup':
                 let lookupEmployee = employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase())
-                console.log(lookupEmployee);
                 if (lookupEmployee !== undefined) {
                     htmlStr += `<div class="print"><p> ${lookupEmployee.name} </p>`;
                     htmlStr += `<p> ${lookupEmployee.officeNum} </p>`;
@@ -119,7 +118,9 @@ const state = {
                 render(htmlStr);
                 break;
             case 'delete':
-                employeeList.splice(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase(), 1)
+                let deleteEmployee = employeeList.indexOf($('#input').val().toLowerCase())
+                console.log(deleteEmployee);
+                employeeList.splice(deleteEmployee, 1);
                 employeeList.forEach(employee => {
                     htmlStr += `<div class="print"><p> ${employee.name} </p>`;
                     htmlStr += `<p> ${employee.officeNum} </p>`;
@@ -269,4 +270,4 @@ $('#update').on('click', update);
 $('#add').on('click', add);
 $('#delete').on('click', remove);
 $('#alphabetize').on('click', alphabetize);
-$('button').on('click', state.runFunction);
+$('#submit').on('click', state.runFunction);

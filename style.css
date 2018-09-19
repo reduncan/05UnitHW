@@ -22,6 +22,22 @@ aside {
     align-items: center;
 }
 
+li {
+    margin-bottom: 5px;
+}
+
+i {
+    color: white;
+    position: relative;
+    left: 25px;
+}
+
+h4 {
+    color: yellow;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 h6 {
     color: white;
     font-size: 14px;
@@ -34,7 +50,12 @@ h6:hover {
 }
 
 .two {
-    background: url(bckg.jpg);
+    background: 
+        linear-gradient(
+        rgba(51, 51, 51, 0.45), 
+        rgba(51, 51, 51, 0.45)
+      ),
+      url(bckg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -85,11 +106,12 @@ input::placeholder {
     text-align: center;
 }
 
-button {
-    display: none;
+#submit {
+    
     position: relative;
-    left: 350px;
-    bottom: 37px;
+    color: white;
+    left: 330px;
+    bottom: 34px;
     z-index: 10;
 }
 
@@ -100,6 +122,10 @@ button {
 .hide {
     display: none;
 }
+
+/* .move {
+
+} */
 
 #render {
     margin: 20px;
