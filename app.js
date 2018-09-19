@@ -51,9 +51,9 @@ const state = {
         switch (databaseFunction) {
             case 'print':
                 employeeList.forEach(employee => {
-                    htmlStr += `<div class="print"><p> ${employee.name} </p>`;
-                    htmlStr += `<p> ${employee.officeNum} </p>`;
-                    htmlStr += `<p> ${employee.phoneNum} </p>`;
+                    htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
+                    htmlStr += `<p>Office Numebr: ${employee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
                     htmlStr += `<p>-----</p></div>`;
                 });
                 render(htmlStr);
@@ -65,9 +65,9 @@ const state = {
             case 'lookup':
                 let lookupEmployee = employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase())
                 if (lookupEmployee !== undefined) {
-                    htmlStr += `<div class="print"><p> ${lookupEmployee.name} </p>`;
-                    htmlStr += `<p> ${lookupEmployee.officeNum} </p>`;
-                    htmlStr += `<p> ${lookupEmployee.phoneNum} </p>`;
+                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p></div>`;
                 } else {
                     htmlStr += '<div class="print"><p>Employee Not Found</p></div>'
                 };
@@ -78,9 +78,9 @@ const state = {
                 userInput = $('#input').val().toLowerCase();
                 let foundEmployee = employeeList.filter(employee => employee.name.toLowerCase().includes(userInput));
                 foundEmployee.forEach(employee => {
-                    htmlStr += `<div class="print"><p> ${employee.name} </p>`;
-                    htmlStr += `<p> ${employee.officeNum} </p>`;
-                    htmlStr += `<p> ${employee.phoneNum} </p>`;
+                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p></div>`;
                     htmlStr += `<p> ----- </p></div>`;
                     containsEmployee = true;
                 });
@@ -94,9 +94,9 @@ const state = {
                 update.officeNum = $('#office').val();
                 update.phoneNum = $('#phone').val();
                 if (updateEmployee !== undefined) {
-                    htmlStr += `<div class="print"><p> ${updateEmployee.name} </p>`;
-                    htmlStr += `<p> ${update.officeNum} </p>`;
-                    htmlStr += `<p> ${update.phoneNum} </p></div>`;
+                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p></div>`;
                 }
                 render(htmlStr);
                 break;
@@ -110,9 +110,9 @@ const state = {
                 employeeList.push(newEmployee);
 
                 employeeList.forEach(employee => {
-                    htmlStr += `<div class="print"><p> ${employee.name} </p>`;
-                    htmlStr += `<p> ${employee.officeNum} </p>`;
-                    htmlStr += `<p> ${employee.phoneNum} </p>`;
+                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p>`;
                     htmlStr += `<p> ----- </p></div>`;
                 });
                 render(htmlStr);
@@ -124,13 +124,14 @@ const state = {
                     htmlStr += `<p>No Employee Match</p>`;
                 };
                 if (deleteEmployee !== -1) {
-                employeeList.splice(deleteEmployee, 1);
-                employeeList.forEach(employee => {
-                    htmlStr += `<div class="print"><p> ${employee.name} </p>`;
-                    htmlStr += `<p> ${employee.officeNum} </p>`;
-                    htmlStr += `<p> ${employee.phoneNum} </p>`;
-                    htmlStr += `<p> ----- </p></div>`;
-                })};
+                    employeeList.splice(deleteEmployee, 1);
+                    employeeList.forEach(employee => {
+                        htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
+                        htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
+                        htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p>`;
+                        htmlStr += `<p> ----- </p></div>`;
+                    })
+                };
                 render(htmlStr);
                 break;
             case 'alphabetize':
@@ -143,9 +144,9 @@ const state = {
                     return 0
                 })
                 employeeList.forEach(employee => {
-                    htmlStr += `<div class="print"><p> ${employee.name} </p>`;
-                    htmlStr += `<p> ${employee.officeNum} </p>`;
-                    htmlStr += `<p> ${employee.phoneNum} </p>`;
+                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p>`;
                     htmlStr += `<p> ----- </p></div>`;
                 })
                 render(htmlStr);
