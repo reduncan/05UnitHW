@@ -114,19 +114,23 @@ const state = {
                     htmlStr += `<p> ${employee.officeNum} </p>`;
                     htmlStr += `<p> ${employee.phoneNum} </p>`;
                     htmlStr += `<p> ----- </p></div>`;
-                })
+                });
                 render(htmlStr);
                 break;
             case 'delete':
-                let deleteEmployee = employeeList.indexOf($('#input').val().toLowerCase())
+                let deleteEmployee = employeeList.findIndex(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase())
                 console.log(deleteEmployee);
+                if (deleteEmployee === -1) {
+                    htmlStr += `<p>No Employee Match</p>`;
+                };
+                if (deleteEmployee !== -1) {
                 employeeList.splice(deleteEmployee, 1);
                 employeeList.forEach(employee => {
                     htmlStr += `<div class="print"><p> ${employee.name} </p>`;
                     htmlStr += `<p> ${employee.officeNum} </p>`;
                     htmlStr += `<p> ${employee.phoneNum} </p>`;
                     htmlStr += `<p> ----- </p></div>`;
-                })
+                })};
                 render(htmlStr);
                 break;
             case 'alphabetize':
