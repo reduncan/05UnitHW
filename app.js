@@ -158,6 +158,10 @@ const hideTitle = function () {
     $('.title').addClass('hide');
 }
 
+const showTitle = function () {
+    $('.title').removeClass('hide');
+}
+
 const showRender = function () {
     $('#render').addClass('show');
 }
@@ -190,6 +194,14 @@ const hidePrint = function () {
     $('.print').addClass('hide');
 }
 
+const home = function () {
+    showTitle();
+    removeFields();
+    hideInput();
+    hideForm();
+    hidePrint();
+}
+
 const print = function (event) {
     databaseFunction = 'print';
     state.runFunction(event);
@@ -208,7 +220,7 @@ const verify = function (event) {
     hideTitle();
 }
 
-const lookup = function (event) {
+const lookup = function () {
     databaseFunction = 'lookup';
     hidePrint();
     addInput();
@@ -262,6 +274,7 @@ const alphabetize = function (event) {
     hideTitle();
 }
 
+$('.far, h4').on('click', home);
 $('#print').on('click', print);
 $('#verify').on('click', verify);
 $('#lookup').on('click', lookup);
