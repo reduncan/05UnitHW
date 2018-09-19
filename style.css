@@ -93,10 +93,16 @@ form {
     display: none;
 }
 
+.form {
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 input {
     display: none;
-    border-radius: 25px;
-    margin: 10px;
+    border-radius: 5px;
+    margin: 20px;
     height: 25px;
     width: 300px;
     text-align: center;
@@ -107,11 +113,10 @@ input::placeholder {
 }
 
 #submit {
-    
     position: relative;
     color: white;
     left: 330px;
-    bottom: 34px;
+    bottom: 43px;
     z-index: 10;
 }
 
