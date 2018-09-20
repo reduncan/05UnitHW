@@ -52,7 +52,7 @@ const state = {
             case 'print':
                 employeeList.forEach(employee => {
                     htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
-                    htmlStr += `<p>Office Numebr: ${employee.officeNum}</p>`;
+                    htmlStr += `<p>Office Number: ${employee.officeNum}</p>`;
                     htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
                     htmlStr += `<p>-----</p></div>`;
                 });
@@ -78,9 +78,9 @@ const state = {
                 userInput = $('#input').val().toLowerCase();
                 let foundEmployee = employeeList.filter(employee => employee.name.toLowerCase().includes(userInput));
                 foundEmployee.forEach(employee => {
-                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
-                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
-                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p></div>`;
+                    htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${employee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
                     htmlStr += `<p> ----- </p></div>`;
                     containsEmployee = true;
                 });
@@ -94,9 +94,9 @@ const state = {
                 update.officeNum = $('#office').val();
                 update.phoneNum = $('#phone').val();
                 if (updateEmployee !== undefined) {
-                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
-                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
-                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p></div>`;
+                    htmlStr += `<div class="print"><p>Name: ${updateEmployee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${updateEmployee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${updateEmployee.phoneNum}</p></div>`;
                 }
                 render(htmlStr);
                 break;
@@ -110,9 +110,9 @@ const state = {
                 employeeList.push(newEmployee);
 
                 employeeList.forEach(employee => {
-                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
-                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
-                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p>`;
+                    htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${employee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
                     htmlStr += `<p> ----- </p></div>`;
                 });
                 render(htmlStr);
@@ -126,9 +126,9 @@ const state = {
                 if (deleteEmployee !== -1) {
                     employeeList.splice(deleteEmployee, 1);
                     employeeList.forEach(employee => {
-                        htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
-                        htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
-                        htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p>`;
+                        htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
+                        htmlStr += `<p>Office Number: ${employee.officeNum}</p>`;
+                        htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
                         htmlStr += `<p> ----- </p></div>`;
                     })
                 };
@@ -144,9 +144,9 @@ const state = {
                     return 0
                 })
                 employeeList.forEach(employee => {
-                    htmlStr += `<div class="print"><p>Name: ${lookupEmployee.name}</p>`;
-                    htmlStr += `<p>Office Number: ${lookupEmployee.officeNum}</p>`;
-                    htmlStr += `<p>Phone Number: ${lookupEmployee.phoneNum}</p>`;
+                    htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
+                    htmlStr += `<p>Office Number: ${employee.officeNum}</p>`;
+                    htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
                     htmlStr += `<p> ----- </p></div>`;
                 })
                 render(htmlStr);
