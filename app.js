@@ -50,7 +50,7 @@ const state = {
         let htmlStr = '';
         switch (databaseFunction) {
             case 'print':
-                employeeList.forEach(employee => {
+                    employeeList.forEach(employee => {
                     htmlStr += `<div class="print"><p>Name: ${employee.name}</p>`;
                     htmlStr += `<p>Office Number: ${employee.officeNum}</p>`;
                     htmlStr += `<p>Phone Number: ${employee.phoneNum}</p>`;
