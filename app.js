@@ -91,8 +91,8 @@ const state = {
                 break;
             case 'update':
                 let updateEmployee = employeeList.find(employee => employee.name.toLowerCase() === $('#input').val().toLowerCase())
-                update.officeNum = $('#office').val();
-                update.phoneNum = $('#phone').val();
+                updateEmployee.officeNum = $('#office').val();
+                updateEmployee.phoneNum = $('#phone').val();
                 if (updateEmployee !== undefined) {
                     htmlStr += `<div class="print"><p>Name: ${updateEmployee.name}</p>`;
                     htmlStr += `<p>Office Number: ${updateEmployee.officeNum}</p>`;
