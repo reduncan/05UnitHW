@@ -28,9 +28,12 @@ li {
 
 i {
     color: white;
-    position: relative;
-    left: 25px;
     cursor: pointer;
+}
+
+button {
+    background-color: transparent;
+    border: none;
 }
 
 h4 {
@@ -119,7 +122,7 @@ input::placeholder {
     position: relative;
     color: white;
     left: 330px;
-    bottom: 43px;
+    bottom: 47px;
     z-index: 10;
 }
 
